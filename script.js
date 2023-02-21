@@ -45,3 +45,27 @@ const buy_stock = (price) =>
 
     return profit;
 }
+
+
+/* ----- Contains Duplicate ----- */
+
+const duplicate = (nums) =>
+{
+    const storage = [];
+    let tof = '';
+
+    for ( let i = 0; i < nums.length; i++) 
+    {
+        if (storage.includes(nums[i])) 
+        {
+            tof = 'true';
+        } 
+        else 
+        {
+            storage.push(nums[i]);
+            tof = 'false';
+        }
+    }
+
+    return tof;
+}
