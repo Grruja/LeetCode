@@ -145,3 +145,36 @@ function findMin(nums) {
     }
     return nums[left];
 }
+
+
+/* ----- Search in Rotated Sorted Array ----- */
+
+function findTargetInRotatedArray(nums, target) {
+    let left = 0;
+    let right = nums.length - 1;
+
+    while (left <= right) {
+        let mid = Math.floor((left + right) / 2);
+        if (nums[mid] === target) {
+            console.log(nums[mid]);
+            return nums[mid];
+        }
+
+        if (nums[left] <= nums[mid]) {
+            if (target >= nums[left] && target <= nums[mid]) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        } else {
+            if (target >= nums[mid] && target <= nums[right]) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+    }
+    nums[left] = -1;
+    console.log(nums[left]);
+    return nums[left];
+}
