@@ -178,3 +178,33 @@ function findTargetInRotatedArray(nums, target) {
     console.log(nums[left]);
     return nums[left];
 }
+// -1 -1 2 -1 0 1
+const nums = [-1,0,1,2,-1,-4];
+let solution = [];
+let left = 0;
+let right = nums.length-1;
+
+if (nums.length < 3) console.log(solution);
+nums.sort((a,b) => {return a-b}); // [-4,-1,-1,0,1,2]
+
+for (let i = 0; i < nums.length; i++) {
+    if (nums[i] > 0) console.log(solution);
+    if (nums[i] === nums[i-1]) continue; // moze i ne mora
+
+    left = i+1;
+    let temp = 0;
+
+    while (left < right) {
+        temp = nums[i] + nums[left] + nums[right];
+        if (temp === 0) {
+            solution.push(nums[i],nums[left],nums[right]);
+            left++;
+            right--;
+
+        } else if (temp > 0) {
+            right--;
+        } else if (temp < 0) {
+            left++;
+        }
+    }
+}
