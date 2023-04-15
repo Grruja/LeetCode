@@ -178,33 +178,49 @@ function findTargetInRotatedArray(nums, target) {
     console.log(nums[left]);
     return nums[left];
 }
-// -1 -1 2 -1 0 1
-const nums = [-1,0,1,2,-1,-4];
-let solution = [];
-let left = 0;
-let right = nums.length-1;
 
-if (nums.length < 3) console.log(solution);
-nums.sort((a,b) => {return a-b}); // [-4,-1,-1,0,1,2]
 
-for (let i = 0; i < nums.length; i++) {
-    if (nums[i] > 0) console.log(solution);
-    if (nums[i] === nums[i-1]) continue; // moze i ne mora
+/* ----- 3 Sum ----- */
 
-    left = i+1;
-    let temp = 0;
+function threeSum(nums) {
+    let solution = [];
+    let left = 0;
+    let right = nums.length - 1;
 
-    while (left < right) {
-        temp = nums[i] + nums[left] + nums[right];
-        if (temp === 0) {
-            solution.push(nums[i],nums[left],nums[right]);
-            left++;
-            right--;
+    if (nums.length < 3) {
+        console.log(solution);
+        return solution;
+    }
 
-        } else if (temp > 0) {
-            right--;
-        } else if (temp < 0) {
-            left++;
+    nums.sort((a, b) => { return a - b }); // Sort the array
+
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] > 0) {
+            console.log(solution);
+            return solution;
+        }
+        if (i > 0 && nums[i] === nums[i - 1]) continue;
+
+        left = i + 1;
+        let temp = 0;
+
+        while (left < right) {
+            temp = nums[i] + nums[left] + nums[right];
+            if (temp === 0) {
+                solution.push([nums[i], nums[left], nums[right]]);
+                left++;
+                right--;
+
+                while (left < right && nums[left] === nums[left - 1]) left++;
+                while (left < right && nums[right] === nums[right + 1]) right--;
+            } else if (temp > 0) {
+                right--;
+            } else if (temp < 0) {
+                left++;
+            }
         }
     }
+
+    console.log(solution);
+    return solution;
 }
