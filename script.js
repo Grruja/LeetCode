@@ -224,3 +224,25 @@ function threeSum(nums) {
     console.log(solution);
     return solution;
 }
+
+
+/* ----- Container With Most Water ----- */
+
+function maxArea(height) {
+    let left = 0;
+    let right = height.length - 1;
+    let amo = 0;
+
+    while (left < right) {
+        let total = (right - left) * Math.min(height[left], height[right]);
+        amo = Math.max(amo, total);
+
+        if (height[left] < height[right]) {
+            left++;
+        } else {
+            right--;
+        }
+    }
+
+    return amo;
+}
