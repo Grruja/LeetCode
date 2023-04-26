@@ -258,3 +258,23 @@ function getSum(a, b) {
     }
     console.log(a);
 }
+
+
+/* ----- Counting Bits ----- */
+
+function countBits(n) {
+    let ary = Array.from(Array(n + 1).keys());
+    let output = [];
+    let bin = 0;
+
+    for (let i = 0; i < ary.length; i++) {
+        if (i) {
+            bin = i.toString(2).match(/1/g).length;
+        } else {
+            bin = 0;
+        }
+
+        output.push(bin);
+    }
+    return output;
+}
