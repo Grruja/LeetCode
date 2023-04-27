@@ -266,15 +266,25 @@ function countBits(n) {
     let ary = Array.from(Array(n + 1).keys());
     let output = [];
     let bin = 0;
-
+    
     for (let i = 0; i < ary.length; i++) {
         if (i) {
             bin = i.toString(2).match(/1/g).length;
         } else {
             bin = 0;
         }
-
+        
         output.push(bin);
     }
     return output;
+}
+
+
+/* ----- Missing Number ----- */
+
+function missingNumber(nums) {
+    let gsum = (nums.length * (nums.length + 1)) / 2; // Formula for sum of natural numbers
+    let sum = nums.reduce((partialSum, a) => partialSum + a, 0); // Sum of elements in the array
+
+    return gsum - sum;
 }
