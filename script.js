@@ -285,6 +285,20 @@ function countBits(n) {
 function missingNumber(nums) {
     let gsum = (nums.length * (nums.length + 1)) / 2; // Formula for sum of natural numbers
     let sum = nums.reduce((partialSum, a) => partialSum + a, 0); // Sum of elements in the array
-
+    
     return gsum - sum;
+}
+
+
+/* ----- Reverse Bits ----- */
+
+function reverseBits(n) {
+    let ary = n.toString(2).split('').reverse();
+
+    while (ary.length < 32) {
+        ary.push('0');
+    }
+
+    let output = parseInt(ary.join(''), 2);
+    return output;
 }
