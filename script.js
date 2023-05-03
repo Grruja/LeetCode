@@ -345,7 +345,7 @@ function minCoins(coins, amount) {
 
 function lengthOfLIS(nums) {
     let dp = new Array(nums.length).fill(1);
-
+    
     for (let i = 1; i < nums.length; i++) {
         for (let j = i - 1; j >= 0; j--) {
             if (nums[i] > nums[j]) {
@@ -354,4 +354,23 @@ function lengthOfLIS(nums) {
         }
     }
     return Math.max(...dp);
+}
+
+
+/* ----- Longest Increasing Subsequence ----- */
+
+function wordBreak(s, wordDict) {
+    const table = new Array(s.length + 1).fill(false);
+    table[0] = true;
+
+    for (let i = 0; i < table.length; i++) {
+        if (table[i] === false) continue;
+        for (let j = i + 1; j < table.length; j++) {
+            if (wordDict.includes(s.slice(i, j))) {
+                table[j] = true;
+            }
+        }
+    }
+
+    return table[table.length - 1];
 }
