@@ -310,10 +310,32 @@ function climbStairs(n) {
     let arr = [];
     arr[1] = 1;
     arr[2] = 2;
-
+    
     for (let i = 3; i <= n; i++) {
         arr[i] = arr[i - 1] + arr[i - 2];
     }
-
+    
     return arr[n];
+}
+
+
+/* ----- Coin Change ----- */
+
+function minCoins(coins, amount) {
+    const dp = new Array(amount + 1).fill(Infinity);
+    dp[0] = 0;
+
+    for (let coin of coins) {
+        for (let i = 0; i < dp.length; i++) {
+            if (coin <= i) {
+                dp[i] = Math.min(dp[i], 1 + dp[i - coin]);
+            }
+        }
+    }
+
+    if (dp[dp.length - 1] === Infinity) {
+        return -1;
+    } else {
+        return dp[dp.length - 1];
+    }
 }
