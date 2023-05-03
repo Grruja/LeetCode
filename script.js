@@ -324,7 +324,7 @@ function climbStairs(n) {
 function minCoins(coins, amount) {
     const dp = new Array(amount + 1).fill(Infinity);
     dp[0] = 0;
-
+    
     for (let coin of coins) {
         for (let i = 0; i < dp.length; i++) {
             if (coin <= i) {
@@ -332,10 +332,26 @@ function minCoins(coins, amount) {
             }
         }
     }
-
+    
     if (dp[dp.length - 1] === Infinity) {
         return -1;
     } else {
         return dp[dp.length - 1];
     }
+}
+
+
+/* ----- Longest Increasing Subsequence ----- */
+
+function lengthOfLIS(nums) {
+    let dp = new Array(nums.length).fill(1);
+
+    for (let i = 1; i < nums.length; i++) {
+        for (let j = i - 1; j >= 0; j--) {
+            if (nums[i] > nums[j]) {
+                dp[i] = Math.max(dp[i], 1 + dp[j]);
+            }
+        }
+    }
+    return Math.max(...dp);
 }
