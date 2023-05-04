@@ -381,7 +381,7 @@ function wordBreak(s, wordDict) {
 function combinationSum4(nums, target) {
     const dp = new Array(target + 1).fill(0);
     dp[0] = 1;
-
+    
     for (let t = 0; t <= dp.length - 1; t++) {
         for (let n = 0; n < nums.length; n++) {
             if (t >= nums[n]) {
@@ -391,4 +391,19 @@ function combinationSum4(nums, target) {
     }
     
     return dp[dp.length - 1];
+}
+
+
+/* ----- House Robber ----- */
+
+function rob(nums) {
+    if (!nums.length) return 0;
+    if (nums.length === 1) return nums[0];
+    if (nums.length === 2) return Math.max(nums[0], nums[1]);
+
+    for (let i = 2; i < nums.length; i++) {
+        nums[i] = Math.max(nums[i] + nums[i - 2], nums[i] + (nums[i - 3] || 0));
+    }
+
+    return Math.max(nums[nums.length - 1], nums[nums.length - 2]);
 }
