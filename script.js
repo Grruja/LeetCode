@@ -400,10 +400,35 @@ function rob(nums) {
     if (!nums.length) return 0;
     if (nums.length === 1) return nums[0];
     if (nums.length === 2) return Math.max(nums[0], nums[1]);
-
+    
     for (let i = 2; i < nums.length; i++) {
         nums[i] = Math.max(nums[i] + nums[i - 2], nums[i] + (nums[i - 3] || 0));
     }
-
+    
     return Math.max(nums[nums.length - 1], nums[nums.length - 2]);
+}
+
+
+/* ----- House Robber 2 ----- */
+
+function rob(nums) {
+    const nums2 = nums.slice();
+    nums2.pop();
+
+    if (!nums.length) return 0;
+    if (nums.length === 1) return nums[0];
+    if (nums.length === 2) return Math.max(nums[0], nums[1]);
+
+    for (let i = 3; i < nums.length; i++) {
+        nums[0] = 0;
+        nums[i] = Math.max(nums[i] + nums[i - 2], nums[i] + nums[i - 3]);
+    }
+    let noFirst = Math.max(nums[nums.length - 1], nums[nums.length - 2]);
+
+    for (let i = 2; i < nums2.length; i++) {
+        nums2[i] = Math.max(nums2[i] + nums2[i - 2], nums2[i] + (nums2[i - 3] || 0));
+    }
+    let noLast = Math.max(nums2[nums2.length - 1], nums2[nums2.length - 2]);
+
+    return Math.max(noFirst, noLast);
 }
