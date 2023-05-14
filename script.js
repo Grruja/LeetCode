@@ -414,21 +414,42 @@ function rob(nums) {
 function rob(nums) {
     const nums2 = nums.slice();
     nums2.pop();
-
+    
     if (!nums.length) return 0;
     if (nums.length === 1) return nums[0];
     if (nums.length === 2) return Math.max(nums[0], nums[1]);
-
+    
     for (let i = 3; i < nums.length; i++) {
         nums[0] = 0;
         nums[i] = Math.max(nums[i] + nums[i - 2], nums[i] + nums[i - 3]);
     }
     let noFirst = Math.max(nums[nums.length - 1], nums[nums.length - 2]);
-
+    
     for (let i = 2; i < nums2.length; i++) {
         nums2[i] = Math.max(nums2[i] + nums2[i - 2], nums2[i] + (nums2[i - 3] || 0));
     }
     let noLast = Math.max(nums2[nums2.length - 1], nums2[nums2.length - 2]);
-
+    
     return Math.max(noFirst, noLast);
+}
+
+
+/* ----- Decode Ways ----- */
+
+function numDecodings(s) {
+    if (s[0] === '0') return 0;
+
+    const howManyDecodes = Array(s.length + 1).fill(0);
+    howManyDecodes[0] = 1;
+    howManyDecodes[1] = 1;
+
+    for (let i = 2; i <= s.length; i++) {
+        const single = s.slice(i - 1, i);
+        const double = s.slice(i - 2, i);
+
+        if (single > 0) howManyDecodes[i] = howManyDecodes[i - 1];
+        if (double >= 10 && double <= 26) howManyDecodes[i] += howManyDecodes[i - 2];
+    }
+
+    return howManyDecodes[s.length];
 }
