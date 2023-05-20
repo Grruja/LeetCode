@@ -459,12 +459,25 @@ function numDecodings(s) {
 
 function uniquePaths(n, m) {
     const memo = Array(m).fill(Array(n).fill(1));
-
+    
     for (let row = 1; row < m; row++) {
         for (let col = 1; col < n; col++) {
             memo[row][col] = memo[row - 1][col] + memo[row][col - 1];
         }
     }
-
+    
     return memo[m - 1][n - 1];
+}
+
+
+/* ----- Jump game ----- */
+
+function canJump(nums) {
+    let target = nums.length - 1;
+
+    for (let i = nums.length - 2; i >= 0; i--) {
+        if (i + nums[i] >= target) target = i;
+    }
+
+    return target === 0;
 }
