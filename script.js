@@ -474,10 +474,39 @@ function uniquePaths(n, m) {
 
 function canJump(nums) {
     let target = nums.length - 1;
-
+    
     for (let i = nums.length - 2; i >= 0; i--) {
         if (i + nums[i] >= target) target = i;
     }
-
+    
     return target === 0;
+}
+
+
+/* ----- Insert Intervals ----- */
+
+function insertInterval(intervals, newInterval) {
+    let res = [];
+    let i = 0;
+    const start = 0;
+    const end = 1;
+
+    while (i < intervals.length && intervals[i][end] < newInterval[start]) {
+        res.push(intervals[i]);
+        i++;
+    }
+
+    while (i < intervals.length && intervals[i][start] <= newInterval[end]) {
+        newInterval[start] = Math.min(newInterval[start], intervals[i][start]);
+        newInterval[end] = Math.max(newInterval[end], intervals[i][end]);
+        i++;
+    }
+    res.push(newInterval);
+
+    while (i < intervals.length) {
+        res.push(intervals[i]);
+        i++;
+    }
+
+    return res;
 }
