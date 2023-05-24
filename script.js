@@ -519,3 +519,27 @@ function lengthOfLastWord(s) {
     const words = s.split(" ");
     return words[words.length - 1].length;
 }
+
+
+/* ----- Permutation Sequence ----- */
+
+function getPermutation(n, k) {
+    let nums = Array.from({ length: n }, (_, i) => i + 1);
+    let result = '';
+
+    const factorial = [1];
+    for (let i = 1; i <= n; i++) {
+        factorial[i] = factorial[i - 1] * i;
+    }
+
+    k--;
+
+    for (let i = n; i >= 1; i--) {
+        const idx = Math.floor(k / factorial[i - 1]);
+        result += nums[idx];
+        nums.splice(idx, 1);
+        k %= factorial[i - 1];
+    }
+
+    return result;
+}
