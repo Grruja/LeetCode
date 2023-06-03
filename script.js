@@ -357,12 +357,12 @@ function lengthOfLIS(nums) {
 }
 
 
-/* ----- Longest Increasing Subsequence ----- */
+/* ----- Word Break ----- */
 
 function wordBreak(s, wordDict) {
     const table = new Array(s.length + 1).fill(false);
     table[0] = true;
-
+    
     for (let i = 0; i < table.length; i++) {
         if (table[i] === false) continue;
         for (let j = i + 1; j < table.length; j++) {
@@ -371,6 +371,24 @@ function wordBreak(s, wordDict) {
             }
         }
     }
-
+    
     return table[table.length - 1];
+}
+
+
+/* ----- Combination Sum IV ----- */
+
+function combinationSum4(nums, target) {
+    const dp = new Array(target + 1).fill(0);
+    dp[0] = 1;
+
+    for (let t = 0; t <= dp.length - 1; t++) {
+        for (let n = 0; n < nums.length; n++) {
+            if (t >= nums[n]) {
+                dp[t] = dp[t] + dp[t - nums[n]];
+            }
+        }
+    }
+    
+    return dp[dp.length - 1];
 }
